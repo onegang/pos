@@ -1,0 +1,63 @@
+How to use POS Sales Transfer:
+==============================
+
+
+
+If you are setting up the system:
+=================================
+1.) Click on settings.
+
+2.) Enter the FTP settings as provided by your administrator.
+
+3.) Click on "Test FTP Connection" to test the connection
+
+4.) Enter the rest of the tenant information as provided by your administrator.
+
+5.) Click OK to save your changes.
+
+
+
+How to use the system daily:
+============================
+1.) Enter the values of each field. Note that fields marked with * are compulsory.
+
+- Date: (Compulsory) the business date where the sales belong to. E.g. 03/01/2014 (3rd Jan 2014)
+
+- Open Receipt: (Compulsory) the first transaction number for this POS for the day. E.g. R001
+
+- Close Receipt: (Compulsory) the last transaction number for this POS for the day. E.g. R002
+
+- Total Receipt: (Compulsory) the total number of sales receipts including refund receipts issued by the POS. Do not include non-sales transactions such as signon, signoff, reprint, cancellation etc. For F&B tenant, this is the total number of covers. E.g. 10 (10 receipts for the day)
+
+- Gross Sales: (Compulsory) the gross sales value is the sales before DISCOUNT, includes TAX but excludes MISC_TAX, SVR_CHARGE and MISC_CHARGE
+
+- Tax: sales tax, e.g. GST
+
+- Misc Tax: any other tax, if any
+
+- Service Charge: the service charge, if any
+
+- Misc Charge: any other types of charges, e.g. CESS, if any
+
+- Discount:the total discount given, i.e. item discount and receipt discount
+
+- Rounding Amount: the total rounding adjustment amount, positive value if there is a gain in collection and negative value if there is a loss in collection
+
+- Net Sales: (Compulsory) the net sales value excluding TAX, i.e. NET_SALES = GROSS_SALES - DISCOUNT - TAX(gst)
+
+2.) Click on "Transfer File" to begin generating and transferring the file to the destination FTP server.
+
+3.) Close the application by clicking on the X button located on the top right.
+
+
+
+FAQ:
+====
+1.) I see an error "connect:refused"
+Check your FTP settings. If the settings are correct, please contact your administrator.
+
+2.) Where can I find the previous generated files?
+Please check C:\pos\data\archive
+
+3.) I am running out of disk space!
+Please manually delete some of the old generated files from folder C:\pos\data\archive
