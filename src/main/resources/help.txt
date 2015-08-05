@@ -23,27 +23,7 @@ How to use the system daily:
 
 - Date: (Compulsory) the business date where the sales belong to. E.g. 03/01/2014 (3rd Jan 2014)
 
-- Open Receipt: (Compulsory) the first transaction number for this POS for the day. E.g. R001
-
-- Close Receipt: (Compulsory) the last transaction number for this POS for the day. E.g. R002
-
-- Total Receipt: (Compulsory) the total number of sales receipts including refund receipts issued by the POS. Do not include non-sales transactions such as signon, signoff, reprint, cancellation etc. For F&B tenant, this is the total number of covers. E.g. 10 (10 receipts for the day)
-
-- Gross Sales: (Compulsory) the gross sales value is the sales before DISCOUNT, includes TAX but excludes MISC_TAX, SVR_CHARGE and MISC_CHARGE
-
-- Tax: sales tax, e.g. GST
-
-- Misc Tax: any other tax, if any
-
-- Service Charge: the service charge, if any
-
-- Misc Charge: any other types of charges, e.g. CESS, if any
-
-- Discount:the total discount given, i.e. item discount and receipt discount
-
-- Rounding Amount: the total rounding adjustment amount, positive value if there is a gain in collection and negative value if there is a loss in collection
-
-- Net Sales: (Compulsory) the net sales value excluding TAX, i.e. NET_SALES = GROSS_SALES - DISCOUNT - TAX(gst)
+- Sales Amount: (Compulsory) Gross Sales less Discount plus Service Charges (if any) before tax (i.e. GST or CESS)
 
 2.) Click on "Transfer File" to begin generating and transferring the file to the destination FTP server.
 

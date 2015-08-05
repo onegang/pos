@@ -26,7 +26,6 @@ import javax.swing.UnsupportedLookAndFeelException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.sky.pos.domain.POS;
 import com.sky.pos.domain.SalesFile;
 import com.sky.pos.domain.SalesSummary;
 import com.sky.pos.domain.Settings;
@@ -102,8 +101,7 @@ public class Application extends JFrame {
 	private SalesSummary getSalesSummary() {
 		if (sales == null) {
 			Tenant tenant = new Tenant();
-			POS pos = new POS();
-			sales = new SalesSummary(tenant, pos);
+			sales = new SalesSummary(tenant);
 		}
 
 		return sales;
@@ -126,7 +124,7 @@ public class Application extends JFrame {
 							detailsPane.save();
 							startTransfer();
 							incrementTransactionNo();
-							JOptionPane.showMessageDialog(Application.this, "Sucessfully trasnferred file", "Success", JOptionPane.INFORMATION_MESSAGE);
+							JOptionPane.showMessageDialog(Application.this, "Sucessfully transferred file", "Success", JOptionPane.INFORMATION_MESSAGE);
 						} catch (Exception ex) {
 							LOGGER.error("Unable to initiate transfer", ex);
 							JOptionPane.showMessageDialog(Application.this,
@@ -143,14 +141,11 @@ public class Application extends JFrame {
 	}
 
 	private void incrementTransactionNo() throws FileNotFoundException {
-		POS pos = getSalesSummary().getPos();
-		int val = pos.getTransactionNo();
-		val++;
-		if (val > 9999) {
-			val = 1;
-		}
-		pos.setTransactionNo(val);
-		settings.setTransactionNo(val);
+		int transactionNo = settings.getTransactionNo();
+		transactionNo++;
+		if(transactionNo > 999)
+			transactionNo = 0;
+		settings.setTransactionNo(transactionNo);
 		settings.save();
 	}
 
@@ -213,7 +208,7 @@ public class Application extends JFrame {
 	public static void main(String[] args) {
 		try {
 			Application app = new Application();
-			app.setSize(400, 500);
+			app.setSize(400, 200);
 			app.setLocationRelativeTo(null);
 			SwingUtilities.updateComponentTreeUI(app);
 			app.setVisible(true);

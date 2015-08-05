@@ -37,7 +37,6 @@ public class ConfigSettingsDialog extends JDialog {
 	private JTextField passwordText;
 	private JTextField tenantIdText;
 	private JTextField transactionNoText;
-	private JTextField posIdText;
 
 	public ConfigSettingsDialog(JFrame parent, Settings settings) {
 		super(parent, "Configure Settings", true);
@@ -65,7 +64,6 @@ public class ConfigSettingsDialog extends JDialog {
 		usernameText = UIFactory.createTextField(settings.getUsername());
 		passwordText = UIFactory.createTextField(settings.getPassword());
 		tenantIdText = UIFactory.createTextField(settings.getTenantId());
-		posIdText = UIFactory.createTextField(settings.getPosId());
 		transactionNoText = UIFactory.createTextField(String.valueOf(settings
 				.getTransactionNo()));
 
@@ -113,11 +111,9 @@ public class ConfigSettingsDialog extends JDialog {
 			}
 
 		}));
-		contentPane.add(UIFactory.createLabel("TenantID:"));
+		contentPane.add(UIFactory.createLabel("Machine ID:"));
 		contentPane.add(tenantIdText);
-		contentPane.add(UIFactory.createLabel("POS ID:"));
-		contentPane.add(posIdText);
-		contentPane.add(UIFactory.createLabel("Transaction No:"));
+		contentPane.add(UIFactory.createLabel("File Serial Number:"));
 		contentPane.add(transactionNoText);
 		contentPane.add(UIFactory.createButton(new AbstractAction("OK") {
 
@@ -158,7 +154,6 @@ public class ConfigSettingsDialog extends JDialog {
 			settings.setUsername(usernameText.getText());
 			settings.setPassword(passwordText.getText());
 			settings.setTenantId(tenantIdText.getText());
-			settings.setPosId(posIdText.getText());
 			settings.setTransactionNo(Integer.parseInt(transactionNoText
 					.getText()));
 
@@ -174,12 +169,9 @@ public class ConfigSettingsDialog extends JDialog {
 
 	private void validateInput() throws ValidationException {
 		if (tenantIdText.getText().trim().length() == 0) {
-			throw new ValidationException("Tenant ID is needed!");
+			throw new ValidationException("Machine ID is needed!");
 		}
-		if (posIdText.getText().trim().length() == 0) {
-			throw new ValidationException("POS ID is needed!");
-		}
-		validateNumber(transactionNoText, true, "Transaction Number");
+		validateNumber(transactionNoText, true, "File Serial Number");
 	}
 
 	private void validateNumber(JTextField field, boolean compulsory,

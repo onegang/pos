@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.NumberFormat;
 import java.util.Date;
 import java.util.Properties;
 
@@ -12,13 +13,12 @@ public class Settings {
 	
 	private static final String DEFAULT_PATH = "C:/pos/data/";
 	
-	private static final String DEFAULT_HOSTNAME = "127.0.0.1";
+	private static final String DEFAULT_HOSTNAME = "172.30.1.10";
 	private static final int DEFAULT_PORT = 21;
-	private static final String DEFAULT_USERNAME = "user";
-	private static final String DEFAULT_PASSWORD = "password";
-	private static final String DEFAULT_TENANTID = "FEO-Temp";
-	private static final int DEFAULT_TRANSACTIONNO = 1;
-	private static final String DEFAULT_POSID = "01";
+	private static final String DEFAULT_USERNAME = "0700144";
+	private static final String DEFAULT_PASSWORD = "7m2z7E8b";
+	private static final String DEFAULT_TENANTID = "0700144";
+	private static final int DEFAULT_TRANSACTIONNO = 0;
 
 	private String hostname;
 	
@@ -31,8 +31,6 @@ public class Settings {
 	private String tenantId;
 	
 	private int transactionNo;
-	
-	private String posId;
 	
 	private SalesSummary sales;
 	
@@ -55,7 +53,6 @@ public class Settings {
 			password = prop.getProperty("password");
 			tenantId = prop.getProperty("tenantId");
 			transactionNo = Integer.parseInt(prop.getProperty("transactionNo"));
-			posId = prop.getProperty("posId");
 		} else {
 			hostname = DEFAULT_HOSTNAME;
 			port = DEFAULT_PORT;
@@ -63,15 +60,13 @@ public class Settings {
 			password = DEFAULT_PASSWORD;
 			tenantId = DEFAULT_TENANTID;
 			transactionNo = DEFAULT_TRANSACTIONNO;
-			posId = DEFAULT_POSID;
 		}
 		copyToSales();
 	}
 	
-	private void copyToSales() {
+	private void copyToSales() {	
 		sales.getTenant().setId(tenantId);
-		sales.getPos().setId(posId);
-		sales.getPos().setTransactionNo(transactionNo);
+		sales.setTransactionNo(String.format("%03d", transactionNo));
 	}
 	
 	public void save() throws FileNotFoundException {
@@ -85,7 +80,6 @@ public class Settings {
 		prop.put("password", password);
 		prop.put("tenantId", tenantId);
 		prop.put("transactionNo", String.valueOf(transactionNo));
-		prop.put("posId", posId);
 		String comments = "Updated on " + (new Date()).toString();
 		prop.save(new FileOutputStream(file), comments);
 		
@@ -140,12 +134,4 @@ public class Settings {
 		this.transactionNo = transactionNo;
 	}
 
-	public String getPosId() {
-		return posId;
-	}
-
-	public void setPosId(String posId) {
-		this.posId = posId;
-	}
-	
 }
